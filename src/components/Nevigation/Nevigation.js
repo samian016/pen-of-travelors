@@ -90,6 +90,14 @@ const Nevigation = () => {
                                     Home
                                 </Button>
                             </Link>
+                            <Link style={{ textDecoration: 'none' }} to='/createpost'>
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: '#0091ea', display: 'block' }}
+                                >
+                                    post
+                                </Button>
+                            </Link>
 
                             {!isLogged && <div><Link style={{ textDecoration: 'none' }} to='/signin'>
                                 <Button
@@ -126,6 +134,14 @@ const Nevigation = () => {
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 Home
+                            </Button>
+                        </Link>
+                        <Link style={{ textDecoration: 'none' }} to='/createpost'>
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Post
                             </Button>
                         </Link>
 

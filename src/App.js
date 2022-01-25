@@ -9,6 +9,7 @@ import PrivateRouter from './components/Routes/PrivateRouter';
 import Home from './components/Home/Home';
 import UserRoute from './components/Routes/UserRoute';
 import CreatePost from './components/CreatePost/CreatePost';
+import { CircularProgress } from '@mui/material';
 
 function App() {
   return (
@@ -18,9 +19,12 @@ function App() {
           <Nevigation></Nevigation>
           <Switch>
             <Route exact path="/">
-              {/* <Home></Home> */}
-              <CreatePost></CreatePost>
+              <Home></Home>
+              
             </Route>
+            <PrivateRouter path="/createpost">
+              <CreatePost></CreatePost>
+            </PrivateRouter>
             <UserRoute path="/signup" >
               <SignUp></SignUp>
             </UserRoute>
