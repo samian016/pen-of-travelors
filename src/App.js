@@ -10,6 +10,8 @@ import Home from './components/Home/Home';
 import UserRoute from './components/Routes/UserRoute';
 import CreatePost from './components/CreatePost/CreatePost';
 import { CircularProgress } from '@mui/material';
+import Sitereview from './components/SiteReview/Sitereview';
+import MakeAdmin from './components/MakeAdmin/MakeAdmin';
 
 function App() {
   return (
@@ -20,7 +22,8 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home></Home>
-              
+              <Sitereview></Sitereview>
+              <MakeAdmin></MakeAdmin>
             </Route>
             <PrivateRouter path="/createpost">
               <CreatePost></CreatePost>

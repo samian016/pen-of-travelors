@@ -1,31 +1,32 @@
 import { Button, Container, FormLabel, Input, TextField } from '@mui/material';
 import './SignIn.css'
 import React, { useRef } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../useFirebase/hooks/useAuth';
 
 const SignIn = () => {
     const location = useLocation();
     const history = useHistory();
-    const url = location.state?.from || "/";
-
+    const url = location.state?.form?.pathname || '/';
+    // console.log(location.state.form);
+    // console.log(url);
     const { signUsingGoogle, signUsingEmail, message } = useAuth();
     const mail = useRef();
     const pass = useRef();
-    
+
     const login = (e) => {
         e.preventDefault();
         console.log("clicking");
         const email = mail.current.value;
         const password = pass.current.value;
-        signUsingEmail(email, password,history,url);
+        signUsingEmail(email, password, history, url);
         const form = document.getElementsByName('loginFrom')[0];
         form.reset();
     }
     const googlelogin = () => {
         // console.log(history);
-        signUsingGoogle(url,history);
+        signUsingGoogle(url, history);
     }
 
     return (

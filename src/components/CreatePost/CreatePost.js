@@ -9,7 +9,7 @@ const CreatePost = () => {
 
     const [rating, setRating] = useState(1);
     const { user } = useAuth();
-    const [post, setPost] = useState({ ownerEmail:user.email,Rating:rating });
+    const [post, setPost] = useState({ ownerEmail:user.email,Rating:rating, isApproved:false });
    
     const setRate = (num) => {
         setRating(num);

@@ -13,13 +13,12 @@ const UserRoute = ({ children, ...rest }) => {
             </div>
         )
     }
-        console.log(user.email,"gg");
         return (
             <Route {...rest}
                 render={({ location }) =>
                     (!isLogged && !user.email) ? children : <Redirect
                         to={{
-                            pathname: "/home",
+                            pathname: "/",
                             state: { from: location }
                         }} />} />
 

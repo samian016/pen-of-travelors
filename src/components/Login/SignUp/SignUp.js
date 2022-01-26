@@ -15,7 +15,7 @@ const SignUp = () => {
     const date = useRef();
     const location = useLocation();
     const history = useHistory();
-    const url = location.state?.from || '/';
+    const url = location.state?.form?.pathname  || '/';
     const { signUsingGoogle, createUsingEmail, message } = useAuth();
     const finlalPass = (e) => {
         const pass1 = first.current.value;

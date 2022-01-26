@@ -15,6 +15,22 @@ const useFirebase = () => {
 
 
 
+
+
+
+
+    const saveUser = (email, displayName, method) => {
+        const user = { email, displayName,isAdmin:false };
+        
+    };
+
+
+
+
+
+
+
+
     const auth = getAuth();
     const setNewUserName = (name) => {
         updateProfile(auth.currentUser, {
@@ -43,7 +59,8 @@ const useFirebase = () => {
                 verification();
                 setIsLogged(true);
                 setUser(result.user);
-                // console.log(history);    
+                // console.log(history);   
+                saveUser(result.user.email, result.user.displayName, "PUT");
                 history.push(url);
             }).catch((error) => {
                 setMessage(error.message)
@@ -58,6 +75,7 @@ const useFirebase = () => {
                 setNewUserName(name);
                 verification();
                 setUser(user);
+                saveUser(email, name, "POST");
                 setIsLogged(true);
                 history.push(url);
             })
@@ -120,6 +138,15 @@ const useFirebase = () => {
         return () => unsubscribed;
     }, [auth])
 
+
+
+
+
+
+
+    useEffect(() => {
+        
+    }, [user.email]);
 
 
 
