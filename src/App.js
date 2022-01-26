@@ -12,6 +12,8 @@ import CreatePost from './components/CreatePost/CreatePost';
 import { CircularProgress } from '@mui/material';
 import Sitereview from './components/SiteReview/Sitereview';
 import MakeAdmin from './components/MakeAdmin/MakeAdmin';
+import SingleBlog from './components/Approval/SingleBlog';
+import Approval from './components/Approval/Approval';
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
               <Home></Home>
               <Sitereview></Sitereview>
               <MakeAdmin></MakeAdmin>
+
+              <Approval></Approval>
+            
             </Route>
             <PrivateRouter path="/createpost">
               <CreatePost></CreatePost>

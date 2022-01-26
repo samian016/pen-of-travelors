@@ -7,7 +7,7 @@ import useAuth from '../../useFirebase/hooks/useAuth';
 const Sitereview = () => {
     const { user } = useAuth();
     const [rating, setRating] = useState(1);
-    const comment = useRef();
+    const cmnt = useRef();
     const history = useHistory();
 
     const reviewRating = (num) => {
@@ -15,16 +15,26 @@ const Sitereview = () => {
     }
     const postreview = (e) => {
         e.preventDefault();
+        const comment = cmnt.current.value;
         const review = {
             user: user.displayName,
             comment,
             rating,
         }
+        fetch("http://localhost:5000/reviews", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(review),
+        }).then(() => {
+            history.push("/");
+        });
     }
     return (
         <Container>
             <form name='loginFrom' onSubmit={postreview} style={{ textAlign: 'left' }} autoComplete="off"> <br />
-                <TextField inputRef={comment} style={{ width: '100%', marginTop: 10, marginBottom: 10 }} id='comment' required type='text' label="Add Your Comment" /> <br />
+                <TextField inputRef={cmnt} style={{ width: '100%', marginTop: 10, marginBottom: 10 }} id='comment' required type='text' label="Add Your Comment" /> <br />
                 <Typography>Rating:</Typography>
                 <input onChange={() => reviewRating(1)} type="radio" id="star1" name="star" value="1" />
                 <label htmlFor="star1">1</label>

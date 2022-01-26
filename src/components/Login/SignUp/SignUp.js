@@ -12,7 +12,7 @@ const SignUp = () => {
     const second = useRef();
     const name = useRef();
     const email = useRef();
-    const date = useRef();
+    
     const location = useLocation();
     const history = useHistory();
     const url = location.state?.form?.pathname  || '/';
@@ -35,7 +35,6 @@ const SignUp = () => {
     const submit = (e) => {
         e.preventDefault();
         const namef = name.current.value;
-        const datef = date.current.value;
         const emailf = email.current.value;
         const pass = first.current.value;
 
@@ -55,8 +54,6 @@ const SignUp = () => {
                     <h1 style={{ textAlign: 'left', color: '#40bf46', marginBottom: 0 }}> Sign Up</h1>
                     <form onSubmit={submit} validate="true" id='formUp' style={{ textAlign: 'left' }} autoComplete="off"> <br />
                         <TextField inputRef={name} style={{ width: '100%', marginTop: 10, marginBottom: 10 }} id='name' required type='text' label="Name " /> <br />
-                        <label htmlFor="dateOfBirth">Date Of Birth:</label>
-                        <TextField inputRef={date} style={{ width: '100%', marginTop: 10, marginBottom: 10 }} id='date' required type='date' name='dateOfBirth' /> <br />
                         <TextField inputRef={email} style={{ width: '100%', marginTop: 10, marginBottom: 10 }} id='email' required type='email' label="Email Address" /> <br />
                         <TextField onChange={finlalPass} inputRef={first} style={{ width: '100%', marginTop: 10 }} required type='password' id='pass' label="Password" /> <br />
                         <TextField onChange={finlalPass} inputRef={second} style={{ width: '100%', marginTop: 10 }} required type='password' id='pass2' label="Re-type Password" /> <br />

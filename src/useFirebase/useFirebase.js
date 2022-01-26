@@ -20,8 +20,16 @@ const useFirebase = () => {
 
 
     const saveUser = (email, displayName, method) => {
-        const user = { email, displayName,isAdmin:false };
-        
+        const user = { email, displayName };
+
+        fetch("http://localhost:5000/users", {
+            method: method,
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+        }).then();
+
     };
 
 
@@ -145,7 +153,13 @@ const useFirebase = () => {
 
 
     useEffect(() => {
-        
+
+        fetch(`http://localhost:5000/users/${user.email}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setAdmin(data.admin);
+            });
+
     }, [user.email]);
 
 

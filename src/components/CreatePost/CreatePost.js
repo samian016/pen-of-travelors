@@ -1,15 +1,17 @@
-import { Description } from '@mui/icons-material';
+
 import { Button, Container, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useRef } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import useAuth from '../../useFirebase/hooks/useAuth';
 const CreatePost = () => {
 
     const [rating, setRating] = useState(1);
     const { user } = useAuth();
-    const [post, setPost] = useState({ ownerEmail:user.email,Rating:rating, isApproved:false });
+    const history = useHistory();
+    const [post, setPost] = useState({ownerName: user.displayName, ownerEmail:user.email,Rating:rating, isApproved:false });
    
     const setRate = (num) => {
         setRating(num);
@@ -35,6 +37,15 @@ const CreatePost = () => {
         console.log(post);
         const form = document.getElementById('formPost');
         form.reset();
+        fetch("http://localhost:5000/blogs", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(post),
+        }).then(() => {
+            history.push("/booked");
+        });
     }
 
     return (
@@ -56,6 +67,7 @@ const CreatePost = () => {
 
                         <TextField onBlur={postdemo}  style={{ width: '100%', marginTop: 10, marginBottom: 10 }} id='travelTime' name='TimeOfTravel' required type='time'  /> <br />
                         <TextField onBlur={postdemo}  style={{ width: '100%', marginTop: 10 }} required type='text' name='Location' id='location' label="Location" /> <br />
+                        <TextField onBlur={postdemo}  style={{ width: '100%', marginTop: 10 }} required type='text' name='Url' id='url' label="Image Url" /> <br />
                         <TextField onBlur={postdemo}  style={{ width: '100%', marginTop: 10 }} required type='number' id='cost' name='Total Cost' label="Total Cost" /> <br />
                         <Typography>Rating:</Typography>
                         <input onChange={() => setRate(1)} type="radio" id="star1" name="star" value="1" />
