@@ -1,28 +1,33 @@
-import { CircularProgress, Container, Grid } from '@mui/material';
+import { Button, CircularProgress, Container, Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import SingleApproved from './SingleApproved';
-
+import './approve.css'
 
 const ApprovedBlog = () => {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         setLoading(true);
-        fetch("http://localhost:5000/blogs/approved")
+        fetch(`https://fierce-shelf-26334.herokuapp.com/blogs/approved?page=${currentPage}`)
             .then((res) => res.json())
             .then((data) => {
-                setBlogs(data);
+                setBlogs(data.result);
                 setLoading(false);
+                const numOfBlog = data.count;
+                const numOfPage = Math.ceil(numOfBlog / 10);
+                setPage(numOfPage);
             }).finally(() => {
                 setLoading(false);
 
             })
-    }, []);
+    }, [currentPage]);
     // const setApprove = (id) => {
     //     const bool = { status: true };
-    //     fetch(`http://localhost:5000/update/${id}`, {
+    //     fetch(`https://fierce-shelf-26334.herokuapp.com/update/${id}`, {
     //         method: "PUT",
     //         headers: {
     //             "content-type": "application/json",
@@ -41,7 +46,7 @@ const ApprovedBlog = () => {
     // const deletePost = (id) => {
     //     const confirmation = window.confirm("are you sure want to delete?");
     //     if (confirmation) {
-    //         const url = `http://localhost:5000/blogs/${id}`;
+    //         const url = `https://fierce-shelf-26334.herokuapp.com/blogs/${id}`;
     //         fetch(url, {
     //             method: "DELETE",
     //         })
@@ -57,6 +62,9 @@ const ApprovedBlog = () => {
     //         return;
     //     }
     // }
+
+
+
     if (loading) {
         return (
             <div style={{ margin: "auto", padding: "10%", width: "50%", textAlign: "center" }}>
@@ -67,23 +75,33 @@ const ApprovedBlog = () => {
     else {
         return (
             <Container sx={{ my: "5%" }}>
-                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                <Typography variant="h3" style={{ color: "#40bf46", borderBottom: "3px solid #40bf46" }} gutterBottom component="div">
+                    Blogs
+                </Typography>
+                <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     {
                         blogs.map((blog) => (
 
                             <Grid
                                 key={blog._id}
-                                item xs={12} sm={6}>
+                                item xs={12} sm={6} md={6} lg={4}>
                                 <SingleApproved
 
                                     blog={blog}
-                                    // setApprove={setApprove}
-                                    // deletePost={deletePost}
+                                // setApprove={setApprove}
+                                // deletePost={deletePost}
                                 ></SingleApproved>
                             </Grid>
                         ))
                     }
                 </Grid>
+                <Container style={{ textAlign: "center", marginTop: "5%" }}>
+                    {
+                        [...Array(page).keys()].map(num => <Button className={(num === (currentPage - 1)) ? "selected" : ''}
+                            onClick={() => (setCurrentPage(num + 1))}
+                        >{num + 1}</Button>)
+                    }
+                </Container>
             </Container>
         );
     }

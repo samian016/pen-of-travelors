@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Grid } from '@mui/material';
+import { CircularProgress, Container, Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import SingleBlog from './SingleBlog';
@@ -9,7 +9,7 @@ const Approval = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch("http://localhost:5000/blogs")
+        fetch("https://fierce-shelf-26334.herokuapp.com/blogs")
             .then((res) => res.json())
             .then((data) => {
                 setBlogs(data);
@@ -21,7 +21,7 @@ const Approval = () => {
     }, []);
     const setApprove = (id) => {
         const bool = { status: true };
-        fetch(`http://localhost:5000/update/${id}`, {
+        fetch(`https://fierce-shelf-26334.herokuapp.com/update/${id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json",
@@ -29,18 +29,18 @@ const Approval = () => {
             body: JSON.stringify(bool),
         }).then((res) => res.json())
             .then((data) => {
-            if (data.modifiedCount > 0) {
-                alert("Blog Approved");
-                const remainingBlogs = blogs.filter((blog) => blog._id !== id);
-                setBlogs(remainingBlogs);
-            }
-        });
+                if (data.modifiedCount > 0) {
+                    alert("Blog Approved");
+                    const remainingBlogs = blogs.filter((blog) => blog._id !== id);
+                    setBlogs(remainingBlogs);
+                }
+            });
 
     }
     const deletePost = (id) => {
         const confirmation = window.confirm("are you sure want to delete?");
         if (confirmation) {
-            const url = `http://localhost:5000/blogs/${id}`;
+            const url = `https://fierce-shelf-26334.herokuapp.com/blogs/${id}`;
             fetch(url, {
                 method: "DELETE",
             })
@@ -66,6 +66,9 @@ const Approval = () => {
     else {
         return (
             <Container sx={{ my: "5%" }}>
+                <Typography variant="h3" style={{ color: "#40bf46", borderBottom: "3px solid #40bf46" }} gutterBottom component="div">
+                    Need Approval
+                </Typography>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     {
                         blogs.map((blog) => (

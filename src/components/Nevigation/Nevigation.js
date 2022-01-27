@@ -16,7 +16,8 @@ import useAuth from '../../useFirebase/hooks/useAuth';
 
 const Nevigation = () => {
 
-    const { logOut, user, isLogged } = useAuth();
+    const { logOut, user, isLogged,admin } = useAuth();
+    console.log(user);
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -117,6 +118,15 @@ const Nevigation = () => {
                                         Sign Up
                                     </Button>
                                 </Link></div>}
+                            <Link style={{ textDecoration: 'none' }} to='/reviewsite'>
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: '#0091ea', display: 'block' }}
+                                >
+                                    Review site
+                                </Button>
+                            </Link>
+                            
 
                         </Menu>
                     </Box>
@@ -138,7 +148,14 @@ const Nevigation = () => {
                                 Home
                             </Button>
                         </Link>
-                        
+                        <Link style={{ textDecoration: 'none' }} to='/reviewsite'>
+                            <Button
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Review site
+                            </Button>
+                        </Link>
 
                         <Link style={{ textDecoration: 'none' }} to='/createpost'>
                             <Button
@@ -150,6 +167,24 @@ const Nevigation = () => {
                         </Link>
 
                         <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }} data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Top Locations</Button>
+                        {(isLogged && admin) && <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            <Link style={{ textDecoration: 'none' }} to='/makeAdmin'>
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                >
+                                    Make Admin
+                                </Button>
+                            </Link>
+                            <Link style={{ textDecoration: 'none' }} to='/approve'>
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                >
+                                    Post Need Approval
+                                </Button>
+                            </Link>
+                        </Box> }
 
                         {!isLogged && <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             <Link style={{ textDecoration: 'none' }} to='/signin'>
@@ -168,7 +203,8 @@ const Nevigation = () => {
                                     Sign Up
                                 </Button>
                             </Link>
-                        </Box> }
+                        </Box>}
+                        
                     </Box>
 
                     {isLogged && <Box sx={{ flexGrow: 0 }}>

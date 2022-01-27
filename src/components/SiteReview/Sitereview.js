@@ -18,22 +18,28 @@ const Sitereview = () => {
         const comment = cmnt.current.value;
         const review = {
             user: user.displayName,
+            photo: user.photoURL,
             comment,
             rating,
         }
-        fetch("http://localhost:5000/reviews", {
+        fetch("https://fierce-shelf-26334.herokuapp.com/reviews", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
             },
             body: JSON.stringify(review),
         }).then(() => {
+            const form = document.getElementById('reviewForm');
+            form.reset();
             history.push("/");
         });
     }
     return (
         <Container>
-            <form name='loginFrom' onSubmit={postreview} style={{ textAlign: 'left' }} autoComplete="off"> <br />
+            <Typography variant="h3" style={{ color: "#40bf46", borderBottom: "3px solid #40bf46" }} gutterBottom component="div">
+                Review
+            </Typography>
+            <form name='reviewFrom' id='reviewForm' onSubmit={postreview} style={{ textAlign: 'left' }} autoComplete="off"> <br />
                 <TextField inputRef={cmnt} style={{ width: '100%', marginTop: 10, marginBottom: 10 }} id='comment' required type='text' label="Add Your Comment" /> <br />
                 <Typography>Rating:</Typography>
                 <input onChange={() => reviewRating(1)} type="radio" id="star1" name="star" value="1" />

@@ -9,14 +9,13 @@ import PrivateRouter from './components/Routes/PrivateRouter';
 import Home from './components/Home/Home';
 import UserRoute from './components/Routes/UserRoute';
 import CreatePost from './components/CreatePost/CreatePost';
-import { CircularProgress } from '@mui/material';
 import Sitereview from './components/SiteReview/Sitereview';
 import MakeAdmin from './components/MakeAdmin/MakeAdmin';
-import SingleBlog from './components/Approval/SingleBlog';
 import Approval from './components/Approval/Approval';
-import ApprovedBlog from './components/ApprovedBlog/ApprovedBlog';
-import SimpleSlider from './components/SimpleSlider/SimpleSlider';
 import Compare from './components/Compare/Compare';
+import Review from './components/Review/Review';
+import NotFound from './components/NotFound/NotFound';
+import AdminRoute from './components/Routes/AdminRoute';
 
 function App() {
   return (
@@ -26,19 +25,21 @@ function App() {
           <Nevigation></Nevigation>
           <Switch>
             <Route exact path="/">
-              <SimpleSlider></SimpleSlider>
-
-              <Home></Home>
-              <Sitereview></Sitereview>
-              <MakeAdmin></MakeAdmin>
-
-              <Approval></Approval>
-              <ApprovedBlog></ApprovedBlog>
-            
+              <Home></Home>            
             </Route>
+            <AdminRoute path="/makeAdmin">
+              <MakeAdmin></MakeAdmin>
+            </AdminRoute>
+            <AdminRoute path="/approve">
+              <Approval></Approval>
+            </AdminRoute>
             <Route exact path="/compare/:id">
               <Compare></Compare>
             </Route>
+            <PrivateRouter path="/reviewsite">
+              <Sitereview></Sitereview>
+            </PrivateRouter>
+            
             <PrivateRouter path="/createpost">
               <CreatePost></CreatePost>
             </PrivateRouter>
@@ -48,7 +49,9 @@ function App() {
             <UserRoute path="/signin">
               <SignIn></SignIn>
             </UserRoute>
-            <></>
+            <Route path="*">
+              <NotFound></NotFound>
+            </Route>
           </Switch>
           <Footer></Footer>
         </Router>
@@ -58,3 +61,11 @@ function App() {
 }
 
 export default App;
+
+
+// 
+//               
+
+//               
+
+//               

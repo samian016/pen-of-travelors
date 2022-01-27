@@ -10,10 +10,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Rating from 'react-rating';
-import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -24,10 +21,10 @@ const ExpandMore = styled((props) => {
         duration: theme.transitions.duration.shortest,
     }),
 }));
-const SingleApproved = (props) => {
+const SingleReview = (props) => {
     // console.log(user);
     // console.log(user.photoURL);
-    const { blog} = props;
+    const { review } = props;
     const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
@@ -37,71 +34,45 @@ const SingleApproved = (props) => {
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
                 avatar={
-                    <Avatar src={blog.ownerProfile} sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        
+                    <Avatar src={review.photo} sx={{ bgcolor: red[500] }} aria-label="recipe">
+
                     </Avatar>
                 }
-                
-                title={blog.ownerName}
-                subheader={blog.DateOfTravel}
+
+                title={review.user}
             />
-            
-            
+
+
             <CardMedia
 
-                onClick={handleExpandClick}
-                component="img"
-                height="194"
-                image={blog.Url}
-                alt="Paella dish"
             />
             <CardContent onClick={handleExpandClick} >
                 <Typography variant="h6" color="black">
-                 {blog.Heading}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                 Author Email: {blog.ownerEmail}
+                    {review.comment}
                 </Typography>
             </CardContent>
             <CardActions
-                  disableSpacing>
+                disableSpacing>
                 <IconButton aria-label="add to favorites">
                     {/* <FavoriteIcon /> */}
                     <Rating
                         readonly
-                        initialRating={blog.Rating}
+                        initialRating={review.rating}
                         emptySymbol="far fa-star icon"
                         fullSymbol="fas fa-star icon"
-                        ></Rating>
-                    </IconButton>
-                    <IconButton>
-                    <Link to={`/compare/${blog._id}`}><Button variant="contained">
-                        Compare
-                    </Button></Link>
-                    </IconButton>
-                <ExpandMore
-                    onClick={handleExpandClick}
-                    expand={expanded}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                >
-                    <ExpandMoreIcon />
-                </ExpandMore>
+                    >
+
+                    </Rating>
+                </IconButton>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>Location: { blog.Location }</Typography>
-                    <Typography paragraph>
-                        cost: {blog.TotalCost}
-                    </Typography>
-                    <Typography paragraph>
-                        {blog.TourDescription}
-                    </Typography>
-                    
+
+
                 </CardContent>
             </Collapse>
         </Card>
     );
 };
 
-export default SingleApproved;
+export default SingleReview; 
