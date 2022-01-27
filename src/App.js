@@ -16,6 +16,7 @@ import SingleBlog from './components/Approval/SingleBlog';
 import Approval from './components/Approval/Approval';
 import ApprovedBlog from './components/ApprovedBlog/ApprovedBlog';
 import SimpleSlider from './components/SimpleSlider/SimpleSlider';
+import Compare from './components/Compare/Compare';
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
               <ApprovedBlog></ApprovedBlog>
             
             </Route>
+            <Route exact path="/compare/:id">
+              <Compare></Compare>
+            </Route>
             <PrivateRouter path="/createpost">
               <CreatePost></CreatePost>
             </PrivateRouter>
@@ -44,6 +48,7 @@ function App() {
             <UserRoute path="/signin">
               <SignIn></SignIn>
             </UserRoute>
+            <></>
           </Switch>
           <Footer></Footer>
         </Router>
