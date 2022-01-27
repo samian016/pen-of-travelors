@@ -72,7 +72,7 @@ const Approval = () => {
 
                             <Grid
                                 key={blog._id}
-                                item xs={6}>
+                                item xs={12} sm={6}>
                                 <SingleBlog
 
                                     blog={blog}

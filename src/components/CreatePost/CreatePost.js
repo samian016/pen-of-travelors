@@ -9,9 +9,9 @@ import useAuth from '../../useFirebase/hooks/useAuth';
 const CreatePost = () => {
 
     const [rating, setRating] = useState(1);
-    const { user } = useAuth();
+    const { user,admin } = useAuth();
     const history = useHistory();
-    const [post, setPost] = useState({ownerName: user.displayName, ownerEmail:user.email,Rating:rating, isApproved:false });
+    const [post, setPost] = useState({ownerName: user.displayName, ownerEmail:user.email,Rating:rating, isApproved:admin,ownerProfile:user.photoURL });
    
     const setRate = (num) => {
         setRating(num);
@@ -53,7 +53,7 @@ const CreatePost = () => {
         <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, justifyContent: "center", alignItems: "center" }}>
 
             <Box sx={{ width: { xs: "80%", sm: "40%" } }} style={{ textAlign: "center", marginRight: "5%", margin: { xs: "auto" } }}>
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} className=''><Typography sx={{ color: '#40bf46', fontSize: { xs: "50px", sm: "50px", md: "70px", lg: "90px" }, fontWeight: "bold", fontFamily: " Neonderthaw, cursive" }} className='border'>Share your exprience here..</Typography></div>
+                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} className=''><Typography sx={{ color: '#40bf46', fontSize: { xs: "50px", sm: "50px", md: "70px", lg: "90px" }, fontWeight: "bold", fontFamily: " Neonderthaw, cursive" }}>Share your exprience here..</Typography></div>
             </Box>
             <Box sx={{ width: { xs: "80%", sm: "40%" } }} >
 
@@ -68,7 +68,7 @@ const CreatePost = () => {
                         <TextField onBlur={postdemo}  style={{ width: '100%', marginTop: 10, marginBottom: 10 }} id='travelTime' name='TimeOfTravel' required type='time'  /> <br />
                         <TextField onBlur={postdemo}  style={{ width: '100%', marginTop: 10 }} required type='text' name='Location' id='location' label="Location" /> <br />
                         <TextField onBlur={postdemo}  style={{ width: '100%', marginTop: 10 }} required type='text' name='Url' id='url' label="Image Url" /> <br />
-                        <TextField onBlur={postdemo}  style={{ width: '100%', marginTop: 10 }} required type='number' id='cost' name='Total Cost' label="Total Cost" /> <br />
+                        <TextField onBlur={postdemo}  style={{ width: '100%', marginTop: 10 }} required type='number' id='cost' name='Total Cost' label="TotalCost" /> <br />
                         <Typography>Rating:</Typography>
                         <input onChange={() => setRate(1)} type="radio" id="star1" name="star" value="1" />
                         <label htmlFor="star1">1</label>

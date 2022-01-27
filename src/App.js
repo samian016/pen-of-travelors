@@ -14,6 +14,8 @@ import Sitereview from './components/SiteReview/Sitereview';
 import MakeAdmin from './components/MakeAdmin/MakeAdmin';
 import SingleBlog from './components/Approval/SingleBlog';
 import Approval from './components/Approval/Approval';
+import ApprovedBlog from './components/ApprovedBlog/ApprovedBlog';
+import SimpleSlider from './components/SimpleSlider/SimpleSlider';
 
 function App() {
   return (
@@ -23,11 +25,14 @@ function App() {
           <Nevigation></Nevigation>
           <Switch>
             <Route exact path="/">
+              <SimpleSlider></SimpleSlider>
+
               <Home></Home>
               <Sitereview></Sitereview>
               <MakeAdmin></MakeAdmin>
 
               <Approval></Approval>
+              <ApprovedBlog></ApprovedBlog>
             
             </Route>
             <PrivateRouter path="/createpost">

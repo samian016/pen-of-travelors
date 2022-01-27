@@ -99,6 +99,8 @@ const Nevigation = () => {
                                 </Button>
                             </Link>
 
+                            <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: '#0091ea', display: 'block' }} data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Top Locations</Button>
+
                             {!isLogged && <div><Link style={{ textDecoration: 'none' }} to='/signin'>
                                 <Button
                                     onClick={handleCloseNavMenu}
@@ -136,6 +138,8 @@ const Nevigation = () => {
                                 Home
                             </Button>
                         </Link>
+                        
+
                         <Link style={{ textDecoration: 'none' }} to='/createpost'>
                             <Button
                                 onClick={handleCloseNavMenu}
@@ -144,6 +148,8 @@ const Nevigation = () => {
                                 Post
                             </Button>
                         </Link>
+
+                        <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }} data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Top Locations</Button>
 
                         {!isLogged && <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             <Link style={{ textDecoration: 'none' }} to='/signin'>
@@ -168,7 +174,7 @@ const Nevigation = () => {
                     {isLogged && <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="Remy Sharp" src={user.photoURL} />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -200,6 +206,16 @@ const Nevigation = () => {
                     </Box>}
                 </Toolbar>
             </Container>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 style={{color:"black"}} id="offcanvasRightLabel">Top Locations</h5>
+                    <Button sx={{ my: 2, color: '#40bf46', display: 'block' }} data-bs-dismiss="offcanvas" aria-label="Close"> Close </Button>
+                </div>
+                <div class="offcanvas-body">
+                    <Typography style={{ color: "black" }}>This is Under Construction. </Typography>
+                    <Typography style={{ color: "black" }}>it will Be Dynamic </Typography>
+                </div>
+            </div>
         </AppBar>
     );
 };
