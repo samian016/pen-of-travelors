@@ -44,7 +44,7 @@ const CreatePost = () => {
             },
             body: JSON.stringify(post),
         }).then(() => {
-            history.push("/booked");
+            history.push("/");
         });
     }
 
